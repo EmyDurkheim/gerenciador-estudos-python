@@ -30,25 +30,28 @@ while True:
             print("Nenhuma matéria cadastrada.")
 
     elif escolha == '3':
-        horas = input("Digite o número de horas que você estudou hoje: ")
         materia = input("Digite a matéria que você estudou: ")
-        print(f"Você estudou {horas} horas hoje. Continue assim!")
-        if horas.isdigit():
-            print("Total de horas:")
-            for i, horas in enumerate(horas, start=1):
-                print(f"{i}. {horas} horas em {materia}")
-            horas_estudo.append((materia, int(horas)))
+        if materia not in materias:
+            print(f"A matéria '{materia}' não está cadastrada.")
         else:
-            print("Nenhuma hora registrada.")
+            horas_input = input(f"Quantas horas você estudou em '{materia}' hoje? ")
+
+        if horas_input.isdigit():
+            horas = int(horas_input)
+            horas_estudo.append((materia, horas))
+            print(f"{horas} horas registradas para a matéria '{materia}'.")
+        else:
+            print("Valor inválido. Por favor, digite um número.")
 
     elif escolha == '4':
-        total_horas = sum(horas for _, horas in horas_estudo)
-        print(f"Total de horas estudadas: {total_horas} horas")
+        if horas_estudo:
+            total_horas = sum(horas for _, horas in horas_estudo)
+        
         print("Detalhes das horas estudadas:")
+        print(f"Total de horas estudadas: {total_horas} horas")
         for materia, horas in horas_estudo:
             print(f"{materia}: {horas} horas")
-        total_horas = sum(horas for _, horas in horas_estudo)
-        print(f"Total de horas estudadas: {total_horas} horas")
+            
 
     elif escolha == '5':
         print("Saindo do Gerenciador de Estudos. Até a próxima!")
@@ -56,6 +59,4 @@ while True:
 
     else:
         print("Opção inválida. Por favor, tente novamente.")
-
-
 
